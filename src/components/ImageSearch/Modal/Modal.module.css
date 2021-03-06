@@ -1,0 +1,35 @@
+/* Стили компонента Modal  */
+/* (см.стили еще в APP - с ними на mobile - дисплей тянется там задано - max-width: 100%;) */
+
+.modal__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  z-index: 1200;
+}
+
+.modal__content {
+  /* max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 24px); */
+  max-width: calc(100vw - 24px);
+  max-height: calc(100vh - 12px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* min-height: 300px; */
+  /* min-width: 320px; */
+  /* width: 100%; */
+  padding: 12px;
+  /* background-color: white; */
+  border-radius: 3px;
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px -0px rgba(0, 0, 0, 0.12);
+}
