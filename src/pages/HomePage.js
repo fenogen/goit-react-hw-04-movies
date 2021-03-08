@@ -1,5 +1,6 @@
 
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 import * as api from '../api/ApiSearchFilm';
 
@@ -12,13 +13,17 @@ export default class HomePage extends Component {
         search: null,
     }
 
+    componentDidMount() {
+        this.fnGetCollection();
+    }
+
   fnGetCollection = () => {
-    // console.log('Go to backend');
+    console.log('Go to backend - trends');
     // this.setState({
     //   loader: true, //---> Включили Spiner
     // });
     api
-      .getImage()
+      .getListTrends()
         .then(data => {
             console.log(data)
             this.setState({
@@ -33,10 +38,16 @@ export default class HomePage extends Component {
     render() {
         return (
             <div>
-                <h3></h3>
-                <button
+                <h3>Trending today</h3>
+                <ul>
+                    {this.state.collection.map(item => 
+                        <li key={item.id}>
+                            <Link  to={`movies/${item.id}`}>{item.title}</Link>
+                        </li>)}
+                    </ul>
+                {/* <button
                     type="button"
-                    onClick={this.fnGetCollection}>Get Collection</button>
+                    onClick={this.fnGetCollection}>Get Collection</button> */}
             </div>
         )
     }

@@ -26,6 +26,10 @@ img {
   height: auto;
 }
 
+li {
+  list-style: none;
+}
+
 /*
  * Стили компонента App
  */

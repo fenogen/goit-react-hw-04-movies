@@ -5,7 +5,7 @@ import * as api from '../../api/ApiSearchImage';
 
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
-import Button from './Button/Button';
+import Button from '../FilmSearch/Button/Button';
 import Modal from './Modal/Modal';
 
 
@@ -50,11 +50,16 @@ class ImageSearch extends Component {
     api
       .getImage(this.state.currentPage, this.state.search)
       .then(data => {
-        this.setState({
-          loader: false, //---> Выключили Spiner
-          collection: [...this.state.collection, ...data], //---> Распыляем что бы на экране было больше 12 фото после дозагрузки
-        });
-        console.log(this.state.collection);
+        if (data.length > 0) {
+          this.setState({
+            loader: false, //---> Выключили Spiner
+            collection: [...this.state.collection, ...data], //---> Распыляем что бы на экране было больше 12 фото после дозагрузки
+          });
+        }
+        if (data.length === 0) {
+          console.log('On your request nothing has been found')
+        }
+        // console.log(this.state.collection);
       })
       .catch(() => console.warn('Server communication error'));
   };
