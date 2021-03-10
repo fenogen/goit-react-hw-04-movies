@@ -11,7 +11,7 @@ function Searchbar({fnSearch}) {
 
 
   return (
-    <header className={style.Searchbar}>
+    <div className={style.Searchbar}>
       <form
         className={style.SearchForm}
       onSubmit={fnSubmit}>
@@ -29,7 +29,7 @@ function Searchbar({fnSearch}) {
           // value={}
         />
       </form>
-    </header>
+    </div>
   );
 }
 

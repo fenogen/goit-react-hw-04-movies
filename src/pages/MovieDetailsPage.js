@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import style from '../components/FilmSearch/FilmSearch.module.css';
 
+import route from '../routes';
 import Cast from '../components/FilmSearch/Actors/Cast';
-import Reviews from '../components/FilmSearch/Reviews'
+import Reviews from '../components/FilmSearch/Reviews/Reviews';
 
 import * as api from '../api/ApiSearchFilm';
 
@@ -68,17 +69,15 @@ export default class MovieDetailsPage extends Component {
       genres,
     } = this.state.subject;
     return (
-      <div>
+      <div className={style.container}>
         {this.state.toggle && (
-          <div>
-            <ul>
-              <li>
-                <img
-                  src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-                  width="300"
-                  alt=""
-                ></img>
-              </li>
+          <div className={style.itemDetails}>
+            <img className={style.itemDetails__photo}
+              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+              width="300"
+              alt=""
+            ></img>
+            <ul className={style.itemDetails__list}>
               <li>
                 <h3>{title}</h3>
                 <p>User score: {vote_average * 10}%</p>
@@ -98,7 +97,7 @@ export default class MovieDetailsPage extends Component {
             </ul>
           </div>
         )}
-        <div>
+        <div className={style.itemDetails__info}>
           <h3>Additional information</h3>
           <ul>
             <li>
@@ -110,16 +109,16 @@ export default class MovieDetailsPage extends Component {
           </ul>
         </div>
         <Route
-          path="/movies/:filmId/cast"
+          path={route.cast}
           render={props => <Cast {...props} actors={this.state.actors} />}
         />
         <Route
-          path="/movies/:filmId/reviews"
+          path={route.reviews}
           render={props => <Reviews {...props} reviews={this.state.reviews} />}
         />
-        <button type="button" onClick={this.fnGetCollection}>
+        {/* <button type="button" onClick={this.fnGetCollection}>
           Info
-        </button>
+        </button> */}
       </div>
     );
   }

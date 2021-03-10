@@ -1,15 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
 import style from './Button.module.css';
 
-function Button({fnLoadMore, buttonStatus}) {
+function Button({ fnLoadMore, buttonStatus }) {
   return (
     <div className={style.Button__container}>
-          <button
-              onClick={fnLoadMore}
-        className={style.Button}
-              type="button">
+      <button onClick={fnLoadMore} className={style.Button} type="button">
         Load more
       </button>
     </div>

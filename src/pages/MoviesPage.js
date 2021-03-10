@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import style from '../components/FilmSearch/FilmSearch.module.css';
 
 import * as api from '../api/ApiSearchFilm';
 
 import Button from '../components/FilmSearch/Button/Button';
+import CardItem from '../components/FilmSearch/CardItem/CardItem';
 
 class MoviesPage extends Component {
   state = {
@@ -81,30 +82,31 @@ class MoviesPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className={style.container}>
         <div>
           {/* ----------------------------Form------------------------------ */}
-          <form className={style.SearchForm} onSubmit={this.fnSearch}>
-            <input
-              className={style.SearchForm__input}
-              type="text"
-              // autocomplete="off"
-              // autofocus
-              placeholder="Search film"
-            />
-            <button type="submit" className={style.SearchForm__button}>
-              <span className={style.SearchForm__button_label}>Search</span>
-            </button>
-          </form>
+          <div className={style.Searchbar}>
+            <form className={style.SearchForm} onSubmit={this.fnSearch}>
+              <input
+                className={style.SearchForm__input}
+                type="text"
+                // autocomplete="off"
+                // autofocus
+                placeholder="Search film"
+              />
+              <button type="submit" className={style.SearchForm__button}>
+                <span className={style.SearchForm__button_label}>Search</span>
+              </button>
+            </form>
+          </div>
           {/* ----------------------------List------------------------------ */}
           {this.state.collection.length > 0 && (
-            <ul>
+            <ul className={style.filmList}>
               {this.state.collection.map(item => (
                 <li key={item.id}>
                   <Link to={`${this.props.match.url}/${item.id}`}>
-                          {item.title}
-                      </Link>
-                      {/* <Route path="/movies/:filmId" render={() => <h1>{item.title}</h1>}/> */}
+                    <CardItem srcImg={item.poster_path} title={item.title} />
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -112,11 +114,9 @@ class MoviesPage extends Component {
           {/* ----------------------------Button------------------------------ */}
           {this.state.collection.length > 0 && (
             <Button fnLoadMore={this.fnLoadMore} />
-                )}
-                {/* <Route path="/movies/:filmId" render={()=> <h1>RED</h1>}/> */}
+          )}
         </div>
-            <div>
-        </div>
+        <div></div>
       </div>
     );
   }

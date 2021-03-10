@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 function CastItem({ srcImg, name, role }) {
   return (
     <div>
-      <img src={srcImg} width="100"></img>
+      <img src={srcImg} width="100"
+      alt='' ></img>
       <h4>{name}</h4>
       <p>Character: {role}</p>
     </div>
@@ -16,7 +17,7 @@ CastItem.defaultProps = {
 };
 
 CastItem.propTypes = {
-    srcImg:PropTypes.string.isRequired
+    srcImg: PropTypes.string.isRequired
 };
 
 export default CastItem;

@@ -1,0 +1,42 @@
+.flexbox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-height: 64px;
+  padding-right: 24px;
+  padding-left: 24px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  top: 0;
+  left: 0;
+  position: sticky;
+  z-index: 1101;
+}
+
+.navLink {
+  /* color: currentColor; */
+  padding: 5px;
+  color: #fff;
+  background-color: #3f51b5;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+  text-decoration: none;
+  min-width: 70px;
+  text-align: center;
+}
+
+/* .navLink__active {
+  background-color: darkgreen;
+} */
+
+.navLink__active {
+  /* font-size: 20px; */
+  /* display: block; */
+
+  /* padding-bottom: 8px; */
+  /* border: 3px solid darkgreen; */
+  /* margin-bottom: 48px; */
+  background-color: #3f51b5;
+  color: darkorange;
+}
