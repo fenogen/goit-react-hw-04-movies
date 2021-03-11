@@ -11,7 +11,7 @@ function Cast({ actors }) {
       {actors.map(item => (
         <li key={item.id}>
           <CastItem
-            srcImg={`https://image.tmdb.org/t/p/w500/${item.profile_path}`}
+            srcImg={item.profile_path !== null ? `https://image.tmdb.org/t/p/w500/${item.profile_path}` : 'https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg'}
             name={item.name}
             role={item.character}
           />
@@ -24,6 +24,8 @@ function Cast({ actors }) {
 // Cast.defaultProps = {
 //   avatar: 'https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg',
 // };
+
+
 
 Cast.propTypes = {
   actors: PropTypes.array,

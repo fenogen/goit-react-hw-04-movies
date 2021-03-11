@@ -42,7 +42,12 @@ export default class HomePage extends Component {
         <ul className={style.filmList}>
           {this.state.collection.map(item => (
             <li key={item.id}>
-              <Link to={`movies/${item.id}`}>
+              {/* <Link to={`movies/${item.id}`} */}
+              <Link
+              to={{
+              pathname: `movies/${item.id}`,
+              state: {from: this.props.location.pathname}
+              }}>
                 <CardItem srcImg={item.poster_path} title={item.title} />
               </Link>
             </li>

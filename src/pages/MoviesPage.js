@@ -104,7 +104,9 @@ class MoviesPage extends Component {
             <ul className={style.filmList}>
               {this.state.collection.map(item => (
                 <li key={item.id}>
-                  <Link to={`${this.props.match.url}/${item.id}`}>
+                  <Link to={{pathname: `${this.props.match.url}/${item.id}`,
+                  state: {from: this.props.location.pathname}       //----> Сохранили для возврата на страницу путь
+                }}>
                     <CardItem srcImg={item.poster_path} title={item.title} />
                   </Link>
                 </li>
@@ -113,10 +115,9 @@ class MoviesPage extends Component {
           )}
           {/* ----------------------------Button------------------------------ */}
           {this.state.collection.length > 0 && (
-            <Button fnLoadMore={this.fnLoadMore} />
+            <Button title="Load more" onClick={this.fnLoadMore} />
           )}
         </div>
-        <div></div>
       </div>
     );
   }

@@ -1,0 +1,28 @@
+Ѕутстрап в основном дл€ построени€ сеток, но в –еакте редко
+
+Client ID
+bfc01b42791080598cc6
+
+
+npm install uuid                           уникальный айди
+npm install react-loader-spinner --save    спинер
+
+npm i query-string - библиотека котора€ выт€гивает с адресной строки информацию дл€ поиска
+
+npm install @material-ui/lab - библиотека дл€ стилизации компонентов (аналог бутстрапа)
+npm install --save styled-components - библиотека дл€ стилизации компонентов
+
+https://www.flaticon.com/ - сервис дл€ иконок
+
+’уки:
+import React,{useState,useEffect} from СreactТ;
+import {useHistory,useLocation,useParams,useRouteMatch} from Уreact-router-domФ;
+const SingleUser = () => {
+  const history = useHistory();
+  console.log(history);
+  const location = useLocation();
+  const params = useParams();
+  const match = useRouteMatch();
+  console.log(location);
+  console.log(params);
+  console.log(match);

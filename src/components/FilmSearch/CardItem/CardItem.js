@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function CardItem({srcImg, title}) {
   return (
     <div>
-      <img src={`https://image.tmdb.org/t/p/w500/${srcImg}`}
+      <img src={srcImg !== null ? `https://image.tmdb.org/t/p/w500/${srcImg}` : 'https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg'}
         alt=' '
       ></img>
       <h4>{title}</h4>
@@ -13,7 +13,7 @@ function CardItem({srcImg, title}) {
 }
 
 CardItem.propTypes = {
-    srcImg: PropTypes.string.isRequired,
+    srcImg: PropTypes.string,
     title: PropTypes.string.isRequired
 };
 

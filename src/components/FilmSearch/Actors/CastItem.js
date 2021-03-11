@@ -12,10 +12,6 @@ function CastItem({ srcImg, name, role }) {
   );
 }
 
-CastItem.defaultProps = {
-  srcImg: 'https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg',
-};
-
 CastItem.propTypes = {
     srcImg: PropTypes.string.isRequired
 };
