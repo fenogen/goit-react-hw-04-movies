@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Link, Route, Redirect } from 'react-router-dom';
+import { Link, Route} from 'react-router-dom';
 import style from '../components/FilmSearch/FilmSearch.module.css';
 
-import route from '../routes';
 import Cast from '../components/FilmSearch/Actors/Cast';
 import Reviews from '../components/FilmSearch/Reviews/Reviews';
 import Button from '../components/FilmSearch/Button/Button'
 
 import * as api from '../api/ApiSearchFilm';
+import route from '../routes';
+import {defImg} from '../defaultProps'
 
 export default class MovieDetailsPage extends Component {
   state = {
@@ -17,6 +18,7 @@ export default class MovieDetailsPage extends Component {
     toggle: false,
     actors: [],
     reviews: {},
+    buttonActive: true,
   };
 
   componentDidMount() {
@@ -53,7 +55,7 @@ export default class MovieDetailsPage extends Component {
     api
       .getItemReviews(itemId)
       .then(data => {
-        console.log(data);
+        // console.log(data);
         this.setState({
           reviews: data,
         });
@@ -62,23 +64,7 @@ export default class MovieDetailsPage extends Component {
   };
 
   fnReturnOnPage = () => {
-    this.props.history.push(this.props.location.state.from)
-    // console.log(this.props)
-    // console.log(this.props.location.state)
-    // console.log(typeof this.props.location)
-
-    // this.props.history.push(this.props.location ?.state?. form || '/')
-
-    //   this.props.history.push(this.props.location.state.from)
-    // } else {
-    //   this.props.history.push('/')
-    // }
-
-    // if(this.props.location.state && this.props.location.state.form) {
-    //   this.props.history.push(this.props.location.state.from)
-    // } else {
-    //   this.props.history.push('/')
-    // }
+    this.props.history.push(this.props.location?.state?.from || '/')
   }
 
   render() {
@@ -91,13 +77,13 @@ export default class MovieDetailsPage extends Component {
     } = this.state.subject;
     return (
       <div className={style.container}>
-        <Button title="<-- Return" onClick={this.fnReturnOnPage}/>
-        {/* <Button title="<-- Return" onClick={() => this.props.history.push(this.props.location ?.state ?.form || '/')}/> */}
-          {/* <Redirect to='/'></Redirect> */}
+        {/* -----------------------------------------Button------------------------------------ */}
+        <Button title="<-- Return" onClick={this.fnReturnOnPage} buttonActive={this.state.buttonActive}/>
+        {/* -----------------------------------------Card------------------------------------ */}
         {this.state.toggle && (
           <div className={style.itemDetails}>
             <img className={style.itemDetails__photo}
-              src={poster_path !== null ? `https://image.tmdb.org/t/p/w500/${poster_path}` : 'https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg'}
+              src={poster_path !== null ? `https://image.tmdb.org/t/p/w500/${poster_path}` : defImg}
               width="300"
               alt=""
             ></img>
@@ -139,9 +125,6 @@ export default class MovieDetailsPage extends Component {
           path={route.reviews}
           render={props => <Reviews {...props} reviews={this.state.reviews} />}
         />
-        {/* <button type="button" onClick={this.fnGetCollection}>
-          Info
-        </button> */}
       </div>
     );
   }

@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { defImg  } from '../../../defaultProps'
+
 function CardItem({srcImg, title}) {
   return (
     <div>
-      <img src={srcImg !== null ? `https://image.tmdb.org/t/p/w500/${srcImg}` : 'https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg'}
+      <img src={srcImg !== null ? `https://image.tmdb.org/t/p/w500/${srcImg}` : defImg}
         alt=' '
       ></img>
       <h4>{title}</h4>
@@ -14,7 +16,7 @@ function CardItem({srcImg, title}) {
 
 CardItem.propTypes = {
     srcImg: PropTypes.string,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string,
 };
 
 export default CardItem;

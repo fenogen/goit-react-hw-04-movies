@@ -13,7 +13,9 @@ function CastItem({ srcImg, name, role }) {
 }
 
 CastItem.propTypes = {
-    srcImg: PropTypes.string.isRequired
+  srcImg: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  role: PropTypes.string,
 };
 
 export default CastItem;

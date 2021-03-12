@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 import style from '../components/FilmSearch/FilmSearch.module.css';
 
@@ -15,8 +16,20 @@ class MoviesPage extends Component {
     currentPage: 1,
     error: null,
     loader: false,
-    buttonStatus: true,
+    buttonActive: true,
   };
+
+  componentDidMount() {
+    // -----------------------> Записали значение LocalStorage в наш State при обновлении (условие для того что бы небыло ошибки при пустом массиве)
+    // Удалили значение из LocalStorage непосредственно на странице HomePage
+    const array = localStorage.getItem('search');
+    const parsedArray = JSON.parse(array);
+    if (parsedArray) {
+      this.setState({
+        collection: parsedArray,
+      });
+    }
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.search !== this.state.search) {
@@ -31,6 +44,12 @@ class MoviesPage extends Component {
       console.log('Ф-я Дозагрузки(№2)');
       this.fnGetCollection();
     }
+
+    // -----------------------> Сохранили сесию в LocalStorage (условие для сравнения с предыдущим массивом)
+    if (this.state.collection !== prevState.collection) {
+      localStorage.setItem('search', JSON.stringify(this.state.collection));
+    }
+
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: 'smooth',
@@ -47,7 +66,9 @@ class MoviesPage extends Component {
       currentPage: 1, //---> Сбросили для дозагрузки
       error: null, //---> Сбросили для дозагрузки
       collection: [], //---> Сбросили для дозагрузки
+      buttonActive: true, //---> Сбросили для дозагрузки
     });
+
     e.target.firstChild.value = '';
   };
 
@@ -66,7 +87,9 @@ class MoviesPage extends Component {
             collection: [...this.state.collection, ...data], //---> Распыляем что бы на экране было больше 12 фото после дозагрузки
           });
         } else {
-          alert('On your request nothing has been found');
+          this.setState({
+            buttonActive: false, //---> Сделали кнопку не активной
+          });
         }
       })
       .catch(() => console.warn('Server communication error'));
@@ -99,23 +122,60 @@ class MoviesPage extends Component {
               </button>
             </form>
           </div>
+          {/* ----------------------------Loader-1------------------------------- */}
+          {this.state.loader && this.state.collection.length === 0 ? (
+            <Loader
+              type="BallTriangle"
+              color="#00BFFF"
+              height={150}
+              width={150}
+              style={{
+                marginLeft: '50%',
+                transform: 'translate(-50px)',
+                marginTop: '15%',
+              }}
+              // timeout={3000} //3 secs
+            />
+          ) : null}
           {/* ----------------------------List------------------------------ */}
           {this.state.collection.length > 0 && (
             <ul className={style.filmList}>
               {this.state.collection.map(item => (
                 <li key={item.id}>
-                  <Link to={{pathname: `${this.props.match.url}/${item.id}`,
-                  state: {from: this.props.location.pathname}       //----> Сохранили для возврата на страницу путь
-                }}>
+                  <Link
+                    to={{
+                      pathname: `${this.props.match.url}/${item.id}`,
+                      state: { from: this.props.location.pathname }, //----> Сохранили для возврата на страницу путь
+                    }}
+                  >
                     <CardItem srcImg={item.poster_path} title={item.title} />
                   </Link>
                 </li>
               ))}
             </ul>
           )}
+          {/* ----------------------------Loader-2------------------------------- */}
+          {this.state.loader && this.state.collection.length > 0 ? (
+            <Loader
+              type="ThreeDots"
+              color="#00BFFF"
+              height={100}
+              width={100}
+              style={{
+                marginLeft: '50%',
+                transform: 'translate(-50px)',
+                marginTop: '2%',
+              }}
+              timeout={2000} //3 secs
+            />
+          ) : null}
           {/* ----------------------------Button------------------------------ */}
           {this.state.collection.length > 0 && (
-            <Button title="Load more" onClick={this.fnLoadMore} />
+            <Button
+              buttonActive={this.state.buttonActive}
+              title="Load more"
+              onClick={this.fnLoadMore}
+            />
           )}
         </div>
       </div>

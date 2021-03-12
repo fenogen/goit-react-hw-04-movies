@@ -16,6 +16,9 @@ export default class HomePage extends Component {
 
   componentDidMount() {
     this.fnGetCollection();
+    
+    // -----------------------> Удалили значение из LocalStorage (которое было сохранено в MoviesPage)
+    localStorage.clear('search');
   }
 
   fnGetCollection = () => {
@@ -28,7 +31,7 @@ export default class HomePage extends Component {
       .then(data => {
         console.log(data);
         this.setState({
-          loader: false, //---> Выключили Spiner
+          // loader: false, //---> Выключили Spiner
           collection: [...this.state.collection, ...data], //---> Распыляем что бы на экране было больше 12 фото после дозагрузки
         });
       })
@@ -39,10 +42,10 @@ export default class HomePage extends Component {
     return (
       <div className={style.container}>
         <h3 className={style.trendTitle}>Trending today</h3>
+        {/* ----------------------------List------------------------------- */}
         <ul className={style.filmList}>
           {this.state.collection.map(item => (
             <li key={item.id}>
-              {/* <Link to={`movies/${item.id}`} */}
               <Link
               to={{
               pathname: `movies/${item.id}`,
@@ -53,9 +56,6 @@ export default class HomePage extends Component {
             </li>
           ))}
         </ul>
-        {/* <button
-                    type="button"
-                    onClick={this.fnGetCollection}>Get Collection</button> */}
       </div>
     );
   }

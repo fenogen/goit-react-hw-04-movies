@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import style from '../../FilmSearch/FilmSearch.module.css';
-const Reviews = ({reviews}) => {
+const Reviews = ({ reviews }) => {
   return (
-  <div className={style.reviews}>
-    {/* Условие на ниличе контента описания */}
-    <p>{reviews ?.content || 'Reviews did not find' }</p>
+    <div className={style.reviews}>
+      {/* Условие на ниличе контента описания */}
+      <p>{reviews?.content || 'Reviews did not found'}</p>
     </div>
-    );
-  }
+  );
+};
 
 Reviews.propTypes = {
-  reviews: PropTypes.object
+  reviews: PropTypes.object,
 };
 
 export default Reviews;

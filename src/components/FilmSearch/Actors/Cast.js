@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import style from '../../FilmSearch/FilmSearch.module.css'
+import { defImgAvatar  } from '../../../defaultProps'
 
 import CastItem from './CastItem'
 
@@ -11,7 +12,7 @@ function Cast({ actors }) {
       {actors.map(item => (
         <li key={item.id}>
           <CastItem
-            srcImg={item.profile_path !== null ? `https://image.tmdb.org/t/p/w500/${item.profile_path}` : 'https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg'}
+            srcImg={item.profile_path !== null ? `https://image.tmdb.org/t/p/w500/${item.profile_path}` : defImgAvatar }
             name={item.name}
             role={item.character}
           />
@@ -20,12 +21,6 @@ function Cast({ actors }) {
     </ul>
   );
 }
-
-// Cast.defaultProps = {
-//   avatar: 'https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg',
-// };
-
-
 
 Cast.propTypes = {
   actors: PropTypes.array,
