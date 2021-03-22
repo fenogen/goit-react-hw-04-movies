@@ -124,6 +124,7 @@ class MoviesPage extends Component {
           </div>
           {/* ----------------------------Loader-1------------------------------- */}
           {this.state.loader && this.state.collection.length === 0 ? (
+            <div style={{ paddingBottom: '100px' }}>
             <Loader
               type="BallTriangle"
               color="#00BFFF"
@@ -134,8 +135,9 @@ class MoviesPage extends Component {
                 transform: 'translate(-50px)',
                 marginTop: '15%',
               }}
-              // timeout={3000} //3 secs
-            />
+              // timeout={15000} //3 secs
+              />
+              </div>
           ) : null}
           {/* ----------------------------List------------------------------ */}
           {this.state.collection.length > 0 && (
@@ -168,7 +170,7 @@ class MoviesPage extends Component {
               }}
               timeout={2000} //3 secs
             />
-          ) : null}
+           ) : null}
           {/* ----------------------------Button------------------------------ */}
           {this.state.collection.length > 0 && (
             <Button

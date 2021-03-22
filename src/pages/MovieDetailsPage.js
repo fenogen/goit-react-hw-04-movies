@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Link, Route} from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import style from '../components/FilmSearch/FilmSearch.module.css';
 
 import Cast from '../components/FilmSearch/Actors/Cast';
 import Reviews from '../components/FilmSearch/Reviews/Reviews';
-import Button from '../components/FilmSearch/Button/Button'
+import Button from '../components/FilmSearch/Button/Button';
 
 import * as api from '../api/ApiSearchFilm';
 import route from '../routes';
-import {defImg} from '../defaultProps'
+import { defImg } from '../defaultProps';
 
 export default class MovieDetailsPage extends Component {
   state = {
@@ -64,8 +64,8 @@ export default class MovieDetailsPage extends Component {
   };
 
   fnReturnOnPage = () => {
-    this.props.history.push(this.props.location?.state?.from || '/')
-  }
+    this.props.history.push(this.props.location?.state?.from || '/');
+  };
 
   render() {
     const {
@@ -73,17 +73,26 @@ export default class MovieDetailsPage extends Component {
       title,
       vote_average,
       overview,
-      genres = [],            //----> Указали что это непосредственно массив так как выдавало при "map" ошибку
+      genres = [], //----> Указали что это непосредственно массив так как выдавало при "map" ошибку
     } = this.state.subject;
     return (
       <div className={style.container}>
         {/* -----------------------------------------Button------------------------------------ */}
-        <Button title="<-- Return" onClick={this.fnReturnOnPage} buttonActive={this.state.buttonActive}/>
+        <Button
+          title="<-- Return"
+          onClick={this.fnReturnOnPage}
+          buttonActive={this.state.buttonActive}
+        />
         {/* -----------------------------------------Card------------------------------------ */}
         {this.state.toggle && (
           <div className={style.itemDetails}>
-            <img className={style.itemDetails__photo}
-              src={poster_path !== null ? `https://image.tmdb.org/t/p/w500/${poster_path}` : defImg}
+            <img
+              className={style.itemDetails__photo}
+              src={
+                poster_path !== null
+                  ? `https://image.tmdb.org/t/p/w500/${poster_path}`
+                  : defImg
+              }
               width="300"
               alt=""
             ></img>
@@ -99,8 +108,9 @@ export default class MovieDetailsPage extends Component {
               <li>
                 <h3>Genres:</h3>
                 <ul>
-                    {genres.map(item => (
-                    <li key={item.id}>{item.name}</li>))}
+                  {genres.map(item => (
+                    <li key={item.id}>{item.name}</li>
+                  ))}
                 </ul>
               </li>
             </ul>
@@ -110,10 +120,24 @@ export default class MovieDetailsPage extends Component {
           <h3>Additional information</h3>
           <ul>
             <li>
-              <Link to={`${this.props.match.url}/cast`}>Cast</Link>
+              <Link
+                to={{
+                  pathname: `${this.props.match.url}/cast`,
+                  state: { from: this.props.location.pathname }, //----> Сохранили для возврата на пред.страницу
+                }}
+              >
+                Cast
+              </Link>
             </li>
             <li>
-              <Link to={`${this.props.match.url}/reviews`}>Reviews</Link>
+              <Link
+                to={{
+                  pathname: `${this.props.match.url}/reviews`,
+                  state: { from: this.props.location.pathname }, //----> Сохранили для возврата на пред.страницу
+                }}
+              >
+                Reviews
+              </Link>
             </li>
           </ul>
         </div>

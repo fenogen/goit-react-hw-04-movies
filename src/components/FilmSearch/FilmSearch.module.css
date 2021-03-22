@@ -12,6 +12,7 @@
 
 .trendTitle {
   text-align: center;
+  padding-top: 15px;
 }
 .filmList {
   padding: 0;
@@ -24,6 +25,12 @@
   justify-content: center;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   grid-gap: 24px;
+}
+
+.card__title {
+  text-align: center;
+  font: inherit;
+  font-size: 17px;
 }
 
 /* Стили Searchbar */
