@@ -147,7 +147,8 @@ class MoviesPage extends Component {
                   <Link
                     to={{
                       pathname: `${this.props.match.url}/${item.id}`,
-                      state: { from: this.props.location.pathname }, //----> Сохранили для возврата на страницу путь
+                      // state: { from: this.props.location.pathname }, //----> Сохранили для возврата на страницу путь
+                      state: { from: this.props.location},
                     }}
                   >
                     <CardItem srcImg={item.poster_path} title={item.title} />

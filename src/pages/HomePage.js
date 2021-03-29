@@ -49,7 +49,8 @@ export default class HomePage extends Component {
               <Link
               to={{
               pathname: `movies/${item.id}`,
-              state: {from: this.props.location.pathname}
+              state: { from: this.props.location.pathname }
+              // state: {from: this.props.location.pathname}
               }}>
                 <CardItem srcImg={item.poster_path} title={item.title} />
               </Link>

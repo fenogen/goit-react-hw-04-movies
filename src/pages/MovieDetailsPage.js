@@ -65,6 +65,13 @@ export default class MovieDetailsPage extends Component {
 
   fnReturnOnPage = () => {
     this.props.history.push(this.props.location?.state?.from || '/');
+    // this.props.history.push(this.props.location?.state?.from || '/movies');
+    // console.log(this.props.location.state.from)
+    // console.log(this.props.history.state.from)
+    // if (this.props.location?.state?.from) {
+    //   this.props.history.push(this.props.location?.state?.from)
+    // }
+    // if ()
   };
 
   render() {
@@ -123,7 +130,8 @@ export default class MovieDetailsPage extends Component {
               <Link
                 to={{
                   pathname: `${this.props.match.url}/cast`,
-                  state: { from: this.props.location.pathname }, //----> Сохранили для возврата на пред.страницу
+                  // state: { from: this.props.location.pathname }, //----> Сохранили для возврата на пред.страницу
+                  state: { from: this.props.location.pathname },
                 }}
               >
                 Cast
