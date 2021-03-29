@@ -11,7 +11,7 @@ function CardItem({srcImg, title}) {
       <img src={srcImg !== null ? `https://image.tmdb.org/t/p/w500/${srcImg}` : defImg}
         alt=' '
       ></img>
-      <h4 class={style.card__title}>{title}</h4>
+      <h4 className={style.card__title}>{title}</h4>
     </div>
   );
 }
